@@ -68,5 +68,3 @@ for t in range(int(input())):
         if rev:
             arr.reverse()
         print(f"[{','.join(arr)}]")
-        
-# 37688, 3788
