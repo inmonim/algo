@@ -12,61 +12,66 @@ import sys
 
 input = sys.stdin.readline
 
-def h_min_add(n, Q):
+def max_heap_add(Q:list, n:int):
     Q.append(n)
     i = len(Q)-1
-    
+    while i >= 2 and Q[i] > Q[i//2]:
+        Q[i], Q[i//2] = Q[i//2], Q[i]
+        i = i//2
+    return Q
+
+def min_heap_add(Q: list, n: int):
+    Q.append(n)
+    i = len(Q) - 1
     while i >= 2 and Q[i] < Q[i//2]:
         Q[i], Q[i//2] = Q[i//2], Q[i]
         i = i//2
     return Q
 
-def h_max_add(n, Q):
-    Q.append(n)
-    i = len(Q)-1
-    
-    while i >= 2 and Q[i] > Q[i//2]:
-        Q[i], Q[i//2] = Q[i//2], Q[i]
-        i = i//2
-    return Q
-    
-def h_del_min(Q):
+def max_heap_delete(Q:list):
     if len(Q) <= 2:
         Q = [0]
         return Q
     Q[1] = Q.pop()
     i = 1
     
-    while i*2+1 <= len(Q)-1:
-        if Q[i] > Q[i*2] or Q[i] > Q[i*2+1]:
-            if Q[i*2] > Q[i*2+1]:
-                Q[i], Q[i*2+1] = Q[i*2+1], Q[i]
-                i = i * 2 + 1
-            else:
-                Q[i], Q[i*2] = Q[i*2], Q[i]
-                i = i * 2
+    while i*2 < len(Q):
+        lc, rc = i*2, i*2+1
+        if lc == len(Q)-1:
+            if Q[i] < Q[lc]:
+                Q[i], Q[lc] = Q[lc], Q[i]
+            return Q
+        
+        if Q[i] <= Q[lc] or Q[i] <= Q[rc]:
+            c = lc if Q[lc] > Q[rc] else i*2 + 1
+            Q[i], Q[c] = Q[c], Q[i]
+            i = c
         else:
             return Q
     return Q
 
-def h_del_max(Q):
+def min_heap_delete(Q:list):
     if len(Q) <= 2:
         Q = [0]
         return Q
     Q[1] = Q.pop()
     i = 1
     
-    while i*2+1 <= len(Q)-1:
-        if Q[i] < Q[i*2] or Q[i] < Q[i*2+1]:
-            if Q[i*2] < Q[i*2+1]:
-                Q[i], Q[i*2+1] = Q[i*2+1], Q[i]
-                i = i * 2 + 1
-            else:
-                Q[i], Q[i*2] = Q[i*2], Q[i]
-                i = i * 2
+    while i*2 < len(Q):
+        lc, rc = i*2, i*2+1
+        if i*2 == len(Q)-1:
+            if Q[i] > Q[lc]:
+                Q[i], Q[lc] = Q[lc], Q[i]
+            return Q
+        
+        if Q[i] >= Q[lc] or Q[i] >= Q[rc]:
+            c = lc if Q[lc] < Q[rc] else rc
+            Q[i], Q[c] = Q[c], Q[i]
+            i = c
         else:
             return Q
     return Q
+
 
 for _ in range(int(input())):
     
@@ -75,36 +80,28 @@ for _ in range(int(input())):
     oper = [input().split() for _ in range(N)]
     
     max_q, min_q = [0], [0]
-    
+
     check = 0
-    for i in oper:
-        if i[0] == 'I':
-            check += 1
-        elif i[0] == 'D' and check >= 1:
-            check -= 1
-    
-    if check == 0:
-        print('EMPTY')
-        continue
-    
-    check = 0
-    for i in range(N):
+    for i in range(len(oper)):
         o, n = oper[i]
         n = int(n)
         
         if o == 'I':
-            max_q = h_max_add(n, max_q)
-            min_q = h_min_add(n, min_q)
             check += 1
+            max_q = max_heap_add(max_q, n)
+            min_q = min_heap_add(min_q, n)
         elif o == 'D':
-            if n == -1:
-                min_q = h_del_min(min_q)
-            else:
-                max_q = h_del_max(max_q)
-            
-            if check > 0:
+            if check == 0:
+                max_q, min_q = [], []
+            elif n == -1:
+                min_q = min_heap_delete(min_q)
                 check -= 1
-                if check == 0:
-                    max_q, min_q = [0], [0]
+            else:
+                max_q = max_heap_delete(max_q)
+                check -= 1
 
-    print(f'{max_q[1]} {min_q[1]}')
+    if check == 0 or len(max_q) < 1 or len(min_q) < 1:
+        print('EMPTY')
+    
+    else:
+        print(f'{max_q[1]} {min_q[1]}')
