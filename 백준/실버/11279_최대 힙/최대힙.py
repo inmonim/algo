@@ -45,14 +45,14 @@ oper = [int(input()) for _ in range(int(input()))]
 
 Q = [0]
 
+cnt = 0
 for o in oper:
     if not o:
         if len(Q) == 1:
-            # print(0)
-            pass
+            cnt +=1
         else:
             Q, n = h_pop(Q)
-            # print(n)
+            cnt -= n 
     else:
         Q = h_push(Q, o)
         

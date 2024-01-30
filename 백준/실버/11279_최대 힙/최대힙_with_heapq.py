@@ -10,14 +10,14 @@ import heapq
 def sol(input):
 
     oper = [int(input()) for _ in range(int(input()))]
-
+    cnt = 0
     Q = []
 
     for o in oper:
         if not o:
             if Q:
-                print(-heapq.heappop(Q))
+                cnt += -heapq.heappop(Q)
             else:
-                print(0)
+                cnt -=1
         else:
             heapq.heappush(Q, -o)
