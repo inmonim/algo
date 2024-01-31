@@ -14,4 +14,4 @@ def stdin_time(func):
         run_time = end_time - start_time
         print(f'\n실행시간: {int(run_time*1000)}ms\n')
         
-    return wrapper
+    return wrapper()
