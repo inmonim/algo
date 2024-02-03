@@ -1,12 +1,10 @@
-def my_decorator(func):
-    def wrapper():
-        print("Something is happening before the function is called.")
-        func()
-        print("Something is happening after the function is called.")
-    return wrapper
 
-@my_decorator
-def say_hello():
-    print("Hello!")
 
-say_hello()
+print(ord('z'))
+
+d = {i:-1 for i in range(97, 123)}
+i=0
+for s in input():
+    d[ord(s)] = i if d[ord(s)] == -1 else d[ord(s)]
+    i+=1
+print(' '.join(map(str, d.values())))
