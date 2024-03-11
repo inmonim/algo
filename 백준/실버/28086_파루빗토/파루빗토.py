@@ -32,9 +32,8 @@ def sol(input):
         if b == 0:
             r = 'invalid'
         else:
-            r = a/b
+            r = a//b
 
-    print(r)
     if r == 'invalid':
         print(r)
     else:
