@@ -20,3 +20,5 @@ def sol(input):
             return ((dac(a, b//2, c) ** 2) * a) % c
         
     print(dac(a,b,c))
+    
+    # print(pow(a,b,c))

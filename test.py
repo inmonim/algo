@@ -1,1 +1,3 @@
-print(8 ** 10 % 13)
+import heapq
+
+Q = heapq.heapify()
