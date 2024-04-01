@@ -11,7 +11,6 @@ def sol(input):
     res = [int(input())]+[0]*n
 
     for i in range(1, n):
-        print(res)
         tmp = res[:]
         num = list(map(int, input().split()))
         
