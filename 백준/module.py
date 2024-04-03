@@ -1,8 +1,13 @@
+import sys, os, time
+
 def stdin_time(func):
+    
     def wrapper():
-        import sys, os, time
+        
+        # 파일의 절대 경로 파악
         executing_file = sys.argv[0]
         
+        # 절대 경로에 등록된 input 파일 open
         sys.stdin = open(os.path.dirname(executing_file)+'/input.txt')
         input = sys.stdin.readline
         
