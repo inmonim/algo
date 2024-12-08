@@ -1,12 +1,7 @@
-import array, sys, random
+from random import randint
 
-arr = array.array('i', [])
-list = []
+a = ''
+for i in range(30):
+    a += str(randint(1, 30))+' '
 
-for i in range(100000):
-    x = random.randint(0, 9)
-    list.append(x)
-    arr.append(x)
-
-print(sys.getsizeof(list))
-print(sys.getsizeof(arr))
+print(a)
