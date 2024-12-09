@@ -45,6 +45,6 @@ def stdin_time(func):
         end_time = time.time()
         print('=' * 50)
         run_time = end_time - start_time
-        print(f'\n실행시간: {int(run_time * 1000)}ms\n')
+        print(f'\n실행시간: {int(run_time * 1000)}ms, {int(run_time * 1_000_000)}us\n')
         
     return wrapper()
