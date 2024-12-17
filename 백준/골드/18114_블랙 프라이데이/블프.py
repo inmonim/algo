@@ -10,7 +10,7 @@ def sol(input):
     from itertools import combinations
     n, m = map(int, input().split())
     arr = sorted(list(map(int, input().split())))
-
+    
     def s(arr):
         for r in range(1, 4):
             for combo in combinations(arr, r):

@@ -9,6 +9,8 @@ input = sys.stdin.readline
 
 N = input()+'e'
 
+# 도대체 이게 뭔 코드야 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+
 a = 0
 m = 0
 n = ''

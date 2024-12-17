@@ -5,7 +5,7 @@ sys.path.append(path)
 
 from module import stdin_time
 
-dist = {}
+dist : dict = {}
 
 def distance(x):
     for a in ['E', 'I']:
