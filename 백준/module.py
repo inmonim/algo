@@ -26,7 +26,13 @@ def stdin_time(func):
             func(input)
             sys.stdout = original_stdout
             print(captured_output.getvalue().strip())
-
+        except Exception as e:
+            # 에러 발생 시 캡처된 출력과 에러 메시지를 출력
+            sys.stdout = original_stdout  # 표준 출력을 복구
+            print("중간 출력:")
+            print(captured_output.getvalue())  # 캡처된 출력 내용
+            print("\n에러 발생:", e.with_traceback())  # 에러 메시지
+            return
         finally:
             # 표준 출력을 원래대로 복구
             sys.stdout = original_stdout

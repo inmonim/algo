@@ -14,10 +14,10 @@ def sol(input):
     for y in range(5):
         for x in range(5):
             # 시작점
-            stack = [(mat[y][x], y, x)]
+            q = [(mat[y][x], y, x)]
             # bfs
-            while stack:
-                cur, py, px = stack.pop()
+            while q:
+                cur, py, px = q.pop()
                 for dy, dx in [(-1, 0), (1, 0), (0, 1), (0, -1)]:
                     ny, nx = py+dy, px+dx
                     
@@ -28,6 +28,6 @@ def sol(input):
                             num_set.add(cur + mat[ny][nx])
                         # 다음 스택으로 넘기기
                         else:
-                            stack.append((cur + mat[ny][nx], ny, nx))
+                            q.append((cur + mat[ny][nx], ny, nx))
 
     print(num_set)
